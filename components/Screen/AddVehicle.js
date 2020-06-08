@@ -7,8 +7,8 @@ import *as firebase from 'firebase';
 
 export default class Addvehicle extends Component{
 
-    constructor(props){
-        super(props);
+    constructor(){
+        super();
         this.state={
             VehicleChassis:'',
         VehicleEngine:'',
@@ -20,7 +20,10 @@ export default class Addvehicle extends Component{
         Aadhar:'',
         Number:'',
         Email_address:'',
-        err:'' 
+            
+        };
+        this.data={
+            err:''
         }
     };
      static navigationOptions = {
@@ -43,7 +46,7 @@ render(){
                  setTimeout(()=>{
                     Alert.alert('Vehicle Details Registerd','this details is under verification proccess started..');
                     firebase.database().ref(`/Users/${id}/ownerdetails`).push(this.state);
-                    props.navigation.navigate('Home');
+                    this.props.navigation.navigate('Home');
                  },2000);     
     }
     }
@@ -52,7 +55,7 @@ render(){
         <ImageBackground source={require('../../assets/road.jpg')} style={styles.image}> 
                <View style={styles.container}>
                         <View style={styles.header}>
-                            <Text style={{fontSize:20}}> Enter Vechile Details</Text>
+                            <Text style={{fontSize:20,color:'white'}}> Enter Vechile Details</Text>
                         </View>
                         <ScrollView>
                         <Card containerStyle={styles.formContainer}>
@@ -103,6 +106,15 @@ render(){
                                     this.setState({VehicleChassis:text})
                                                                     }}
                                 value={this.state.VehicleChassis}
+                                inputStyle={{color:'white'}}
+                                containerStyle={styles.formInput}
+                            />
+                            <Input
+                                placeholder="Vehicle Engine"
+                                onChangeText={(text)=>{
+                                    this.setState({VehicleEngine:text})
+                                                                    }}
+                                value={this.state.VehicleEngine}
                                 inputStyle={{color:'white'}}
                                 containerStyle={styles.formInput}
                             />

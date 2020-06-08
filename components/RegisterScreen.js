@@ -58,7 +58,10 @@ this.update=(id)=>{
 .set({
   email: this.state.email,
   name:this.state.username,
-  ph_number:this.state.number
+  ph_number:this.state.number,
+  wallet:{
+      amount:'0'
+  }
 })
 .then(() => console.log('Data set.'));
 }

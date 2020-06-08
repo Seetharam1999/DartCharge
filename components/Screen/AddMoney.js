@@ -23,19 +23,17 @@ export default class AddAmount extends Component{
   return(
       <ImageBackground source={require('../../assets/road.jpg')} style={styles.image}>
             <View style={styles.container}>
-                <View styles={styles.form}>
+              
                     <Text style={{fontSize:30,textAlign:'center',color:'white'}}>Enter Amount</Text>
-                </View>
-                <View style={styles.form}>
+              
                     <Icon
                     type="font-awesome"
-                    
+                    containerStyle={{justifyContent:'center',flexWrap:'wrap',marginLeft:150}}
                     raised
                     iconStyle={{color:'red'}}
                     name="money"
                     />
-                </View>
-                <View style={styles.form}> 
+              
                     <Input
                     containerStyle={styles.input}
                     
@@ -45,14 +43,13 @@ export default class AddAmount extends Component{
                     keyboardType={"numer-pad"}
 
                     />
-                </View>
-                <View style={styles.form}>
+              
                     <Button
                     title="Add Money"
                    containerStyle={styles.btn}
                     onPress={add}
                     />
-                </View>
+             
             </View>
         </ImageBackground>
         )
@@ -62,7 +59,6 @@ export default class AddAmount extends Component{
 
 const styles=StyleSheet.create({
     container:{
-        
         justifyContent:'center',
         alignContent:'center',
         backgroundColor:'transparent'
@@ -71,29 +67,19 @@ const styles=StyleSheet.create({
         flex: 1,
         resizeMode: "cover",
         justifyContent: "center"
-
-    },
-    form:{
-        flex:1,
-        marginTop:10,
-        marginBottom:20,
-       alignItems:'center',
-        justifyContent:'center',
-        width:'80%'
     },
     input:{
-        width:'50%',
-
-         borderRadius:10,
-    backgroundColor:'white'
+        width:'76%',
+	marginLeft:45,
+        borderRadius:10,
+        backgroundColor:'white'
    },
    btn:{
        width:'50%',
-       color:'red',
        alignItems:'center',
-       marginStart:10
-
-
+       marginTop:20,
+	
+marginLeft:90
    }
 
 })

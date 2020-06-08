@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
-import {Text,View,StyleSheet,TouchableOpacity,ImageBackground,FlatList,ScrollView} from 'react-native'
+import {Text,View,StyleSheet,TouchableOpacity,ImageBackground,FlatList,ScrollView, Alert} from 'react-native'
 import *as firebase from 'firebase';
 import { Icon, Card} from 'react-native-elements';
 
 
 export default class Home extends Component{
-     state = { currentUser: null }
+     state = { currentUser: null ,
+    amt:0}
+     
     component=
         [
         {
@@ -46,12 +48,19 @@ export default class Home extends Component{
 
 	 componentDidMount() {
     const { currentUser } = firebase.auth()
-	    this.setState({ currentUser })
-	}
+        this.setState({ currentUser:currentUser})
+        firebase.database().ref(`/Users/${currentUser&&currentUser.uid}/wallet/amount`).on('value',snap=>{
+           this.setState({amt:snap.val()})
+        }) 
+    }
     
 signOut=()=>{
     firebase.auth().signOut();
 
+}
+
+async (){
+    
 }
 renderGrid=({item,index})=>{
     return(
@@ -78,6 +87,7 @@ renderGrid=({item,index})=>{
 }
 image=require('../assets/road.jpg')
     render(){
+
  const { currentUser } = this.state
         return(
         <ImageBackground source={this.image} style={styles.image}>
@@ -86,7 +96,8 @@ image=require('../assets/road.jpg')
            <Text style={{alignItems:'center',color:'white',fontSize:25,marginTop:10}}> Account Balance</Text>
                <View style={styles.amt}>
                <Icon type="font-awesome" name='money'/>
-        <Text style={{textAlign:"justify"}}>{currentUser&&currentUser.displayName}</Text>
+               
+        <Text style={{fontSize:30,marginRight:150}}>{this.state.amt}</Text>
            </View>
          
 <View style={styles.component}>
@@ -119,8 +130,8 @@ const styles=StyleSheet.create({
       justifyContent: "center"
     },amt:{
         flex:0.3,
-        alignItems:'center',
-        flexDirection:'row',
+       alignItems:'center',
+       flexDirection:'row',
         justifyContent:'space-between',
         alignContent:'space-between',
         backgroundColor:'white',

@@ -17,13 +17,6 @@ export  function Profile(){
 }
 
 
-export  function List(){
-    return(<View>
-            <Text>Add Vehicle Screen</Text>
-        </View>)
-
-}
-
 const styles=StyleSheet.create({
     container:{
         flex:1,

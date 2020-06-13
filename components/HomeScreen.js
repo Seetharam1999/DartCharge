@@ -17,7 +17,7 @@ export default class Home extends Component{
             name:'Add Vehcile'
         },{
             id:1,
-            src:'AddVehicle',
+            src:'yourVehicle',
             icon:'search',
             name:'Your Vehicle'
         },{

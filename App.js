@@ -4,7 +4,9 @@ import Loading from './components/LoadingScreen';
 import AddAmount from './components/Screen/AddMoney';
 import Addvehicle from './components/Screen/AddVehicle';
 import List from './components/Screen/Transacation';
-import {Profile,FAQ} from './components/DashboradComponent';
+import FAQ from './components/Screen/FAQs';
+import vehicle from './components/Screen/vehicleDetails';
+import {Profile} from './components/DashboradComponent';
 import Register from './components/RegisterScreen';
 import Home from './components/HomeScreen';
 import {createAppContainer,createSwitchNavigator} from 'react-navigation';
@@ -24,7 +26,7 @@ var firebaseConfig = {
 };
 // Initialize Firebase
 
-firebase.initializeApp(firebaseConfig);
+firebase.initializeApp(firebaseConfig );
 
 
 const AppStack=createStackNavigator({
@@ -32,6 +34,7 @@ const AppStack=createStackNavigator({
   AddVehicle:Addvehicle,
   AddAmount:AddAmount,
   FAQ:FAQ,
+  yourVehicle:vehicle,
   Transaction:List,
   Profile:Profile
 },

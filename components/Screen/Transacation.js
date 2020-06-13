@@ -11,25 +11,25 @@ constructor(props){
             {   loc:'chennai',
                 amt:'60',
                 time:'2020-01-07',
-                
+                paid:'Paid'
             },
             {
                 loc:'chennai',
                 amt:'60',
                 time:'2020-01-06',
-                
+                paid:'Paid'
             },
             {
                 loc:'chennai',
                 amt:'60',
                 time:'2020-01-08',
-                
+                paid:'Paid'
             },
             {
                 loc:'chennai',
                 amt:'60',
                 time:'2020-01-09',
-                
+                paid:'Paid'
             }
         ]
 
@@ -45,26 +45,44 @@ static navigationOptions={
       const id=this.props.navigation.navigate('id','');
    const renderTransacation=({item,index})=>{
                 return(<ScrollView>
-                            <Card
-                            containerStyle={styles.crad}>
+                           <Card containerStyle={styles.data}>
+                            <View style={{flexDirection:'row'}}>
                                <View style={styles.data}>
                                  <Text>{item.loc}</Text>
-                                 <Text>{item.amt}</Text>
-                             <Text>{item.time}</Text>
+                               
 
                                </View>
-                                </Card>        
+                               <View  style={styles.data}>
+                                
+                                 <Text style={{marginRight:50}}>{item.amt}</Text>
+                                
+
+                               </View>
+                               <View  style={styles.data}>
+                               
+                                 <Text style={{marginRight:50}}>{item.time}</Text>
+
+                               </View>
+                               <View style={{borderWidth:1,backgroundColor:'grey',borderRadius:2}}>
+                               
+                               <Text>{item.paid}</Text>
+
+                             </View>
+                                 </View>
+                                 </Card>
                     </ScrollView>
                     )
    }
         return(
 <ImageBackground source={require('../../assets/road.jpg')} style={styles.image}>
             <View style={styles.container}>
+                
                 <FlatList
                 data={this.state.data}
                 renderItem={renderTransacation}
                 
                 keyExtractor={(item)=>{item.time.toString()}}/>
+            
             </View>
             </ImageBackground>
         )
@@ -73,7 +91,7 @@ static navigationOptions={
 const styles=StyleSheet.create({
 container:{
     flex:1,
-    justifyContent:'space-between'
+    justifyContent:'center'
 },
     image:{
         flex:1,
@@ -81,14 +99,9 @@ container:{
         justifyContent:'center'
     },
     data:{
-        flex:2,
+        flex:1,
+        borderRadius:5,
+        width:'95%',
         
-    },
-    crad:{
-      
-        width:'90%',
-        justifyContent:'space-between',
-        alignContent:'space-between',
-
-    }
+      }
 })

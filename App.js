@@ -12,18 +12,16 @@ import Home from './components/HomeScreen';
 import {createAppContainer,createSwitchNavigator} from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';
 import *as firebase from 'firebase';
-//import { AddAmount } from './components/DashboradComponent';
-
 var firebaseConfig = {
-  apiKey: "AIzaSyCXPzNGmtyp9k9-9L4m6z3GWJynLwMBJCM",
-  authDomain: "testlogin-123.firebaseapp.com",
-  databaseURL: "https://testlogin-123.firebaseio.com",
-  projectId: "testlogin-123",
-  storageBucket: "testlogin-123.appspot.com",
-  messagingSenderId: "188959538817",
-  appId: "1:188959538817:web:a68cc064864ddd2f289780",
-  measurementId: "G-SFMNKPD2D1"
+  apiKey: "AIzaSyDRC6sP-vSXqV2mKsK1ujlDdGL4e1O7Mgs",
+  authDomain: "sihtoll-243511.firebaseapp.com",
+  databaseURL: "https://sihtoll-243511.firebaseio.com",
+  projectId: "sihtoll-243511",
+  storageBucket: "sihtoll-243511.appspot.com",
+  messagingSenderId: "443634981804",
+  appId: "1:443634981804:web:eca36162a32b19748cf809"
 };
+
 // Initialize Firebase
 
 firebase.initializeApp(firebaseConfig );

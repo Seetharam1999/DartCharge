@@ -44,16 +44,24 @@ export default class AddAmount extends Component{
           this.setState({amount:''})
       }
       else{
-        firebase.database().ref(`/Users/${this.state.id}/wallet`).on('value',snap=>{
-           if(snap.key==='amount')
-           {
-               console.log('value')
-           }
+          let amt=0;
+          setTimeout(()=>{
+            firebase.database().ref(`/Users/${this.state.id}/wallet/amount`).on('value',snap=>{
+                amt=amt+parseInt(snap.val());
+             
+             })
+                
+        firebase.database().ref(`/Users/${this.state.id}/wallet`).set({
+            
+            amount:amt+ parseInt(this.state.amount)
+        }).then(()=>{
+            Alert.alert('your Amount added',this.state.amount);
         })
-        /*
-        set({
-            amount:this.state.amount
-        })/*
+        
+        this.props.navigation.navigate('Home');
+            
+          },2000)
+       /*
             var options = {
                 description: 'Dart nd Charge',
                 image: 'https://i.imgur.com/3g7nmJC.png',
@@ -81,7 +89,6 @@ export default class AddAmount extends Component{
             
             
            */
-             this.props.navigation.navigate('Home');
             
           
 }

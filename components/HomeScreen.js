@@ -91,13 +91,24 @@ image=require('../assets/road.jpg')
  const { currentUser } = this.state
         return(
         <ImageBackground source={this.image} style={styles.image}>
-
+            <View style={styles.header}>
+                <Icon 
+                    type="font-awesome"
+                    name="sign-out"
+                    reverse
+                    raised
+                    color='red'
+                    onPress={()=>{
+                        this.signOut()
+                    }} 
+                /><Text style={{color:'white',textAlign:'center',marginTop:20,marginLeft:10}}>{currentUser && currentUser.email} </Text>
+            </View>
         <View style={styles.container}>
            <Text style={{alignItems:'center',color:'white',fontSize:25,marginTop:10}}> Account Balance</Text>
                <View style={styles.amt}>
                <Icon type="font-awesome" name='money'/>
                
-        <Text style={{fontSize:30,marginRight:150}}>{this.state.amt}</Text>
+        <Text style={{fontSize:30,marginRight:90}}>{this.state.amt}.Rs</Text>
            </View>
          
 <View style={styles.component}>
@@ -142,7 +153,7 @@ const styles=StyleSheet.create({
         marginBottom:25,
         borderRadius:5
     },btn:{
-        flex:3,
+        flex:2,
         justifyContent:'center',
         alignItems:'center',
         
@@ -155,8 +166,13 @@ const styles=StyleSheet.create({
         shadowOffset:{width:3,height:2}
           },
         component:{
-            flex:1.2,
+            flex:1.3,
            
-           marginBottom:110
+           marginBottom:90
+      },
+      header:{
+          flexDirection:'row',
+        height:'8%',
+        marginLeft:10,
       }
     })

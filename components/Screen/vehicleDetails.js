@@ -1,6 +1,6 @@
 import React,{Component} from 'react';
-import {View,Text,StyleSheet,ImageBackground}from 'react-native';
-import { Icon,Card,Button} from 'react-native-elements';
+import {View,Text,StyleSheet,ImageBackground,ScrollView,TouchableHighlight}from 'react-native';
+import { Icon,Card} from 'react-native-elements';
 import ListView from 'deprecated-react-native-listview';
 import *as firebase from 'firebase';
 //import { FlatList } from 'react-native-gesture-handler';
@@ -8,29 +8,22 @@ export default class vehicle extends Component{
     constructor(props)
     {
         super(props);
+        const id=null;
         let ds=new ListView.DataSource({rowHasChanged:(r1,r2)=>r1!==r2});
        this.state={
            itemDataSource:ds,
-                 id:''
+           id:''
+                
        }
     }
-componentWillMount(){
-    this.getItem();
-}
     componentDidMount(){
          
          const { currentUser } = firebase.auth()
-          this.setState({id:currentUser.uid})
-          console.log(this.state.id);
-          this.getItem()
-    
-        
-        
-        }
-        getItem(){
-            let item=[];
+        this.setState({id:currentUser.uid})
+          let item=[];
             firebase.database().ref(`/Users/`).on('value',snap=>{
                 snap.forEach(data=>{
+                if(data.key===currentUser.uid){
                     data.forEach(dataa=>{
                         dataa.forEach(num=>{
                          num.forEach(da=>{
@@ -41,8 +34,9 @@ componentWillMount(){
                          })
                         })
                     })
+                }
                 })
-              
+            
               })
             this.setState({
                 itemDataSource:this.state.itemDataSource.cloneWithRows(item)
@@ -55,27 +49,33 @@ componentWillMount(){
        
         return(
             <ImageBackground source={require('../../assets/road.jpg')} style={styles.image}>
-                <View style={styles.container}>
+                <ScrollView style={styles.container}>
                <ListView
                dataSource={this.state.itemDataSource}
+               enableEmptySections
                renderRow={(item)=>(
-
-                <Card containerStyle={styles.data}>
-                <View style={{flex:1,flexDirection:'row'}}>
+                <TouchableHighlight onPress={()=>{
+                    this.props.navigation.navigate('Transaction');
+                    
+                }}
+                style={{}}>
+                <Card containerStyle={{borderRadius:5}}>
+                <View style={styles.data}>
                 <Icon
                 type="font-awesome"
-                name='user'
+                name='automobile'
                 raised
-                
+                style={{marginBottom:10}}
                 color='red'
                 reverse/>
-                    <Text style={{fontSize:15,textAlign:'center'}}>
+                    <Text style={{fontSize:15,fontWeight:'bold',marginRight:25}}>
                         {item.title}
                     </Text>
               </View>
                 </Card>
+                </TouchableHighlight>
                )}/>
-             </View>
+             </ScrollView>
                 </ImageBackground>
         )}
 }
@@ -91,9 +91,11 @@ const styles=StyleSheet.create({
         
     },
     data:{
-        flex:1,
-        borderRadius:5,
-        width:'90%',
-        
+        flex:0.5,
+        alignItems:'center',
+        flexDirection:'row',
+         justifyContent:'space-between',
+         alignContent:'space-between',
+                
       }
 })
